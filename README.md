@@ -11,7 +11,7 @@ vagrant up
 vagran ssh   
 django-admin startproject mysite  
 cd mysite  
-python manage.py runserver 0:8000  
+python3 manage.py runserver 0:8000  
 exit  
 
 // Test development server  
