@@ -1,0 +1,83 @@
+---
+- name: setup dev server
+  hosts: all 
+  tasks:      
+    - name: install mariadb-server
+      dnf:
+        name: mariadb-server
+        state: present
+      become: true
+
+    - name: install python3-pip
+      dnf:
+        name: python3-pip
+        state: present
+      become:  true
+   
+    - name: install mariadb-devel 
+      dnf:
+        name: mariadb-devel
+        state: present        
+      become: true
+
+    - name: install gcc
+      dnf:
+        name: gcc
+        state: present
+      become: true
+
+    - name: install redhat-rpm-config
+      dnf:
+        name: redhat-rpm-config
+        state: present
+      become: true
+
+    - name: install python3-devel
+      dnf:
+        name: python3-devel
+        state: present
+      become: true
+     
+    - name: install django 
+      pip:
+        name: "django==2.0.1 mysqlclient==1.3.13 pbr==0.9 psutil==1.2.1"
+        state: present
+        executable: pip3
+        extra_args: --user
+       
+
+    - name: install python2-mysql
+      dnf:
+        name: python2-mysql
+        state: present
+      become: true
+
+    - name: start mariadb-server
+
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: Create a new database with name 'cburestore'
+      mysql_db:
+          name: cburestore
+          state: present    
+          login_user: root
+    
+    - name: Removes all anonymous user accounts
+      mysql_user:
+          name: ''
+          host_all: yes
+          state: absent
+          login_user: root
+
+    - name: Create database user with name 'cburestore' and password 'cburestore' with all database privileges
+      mysql_user:
+        name: cburestore
+        password: cburestore
+        priv: 'cburestore.*:ALL'
+        state: present
+        login_user: root
+    
