@@ -3,7 +3,7 @@ Using vagrant and ansible these files will setup Django 2.01 with a MariaDB data
 
 Requirements: Vagrant
 
-git clone git@github.com:txhc4life/django_blank.git
+git clone git@github.com:txhc4life/django_blank.git  
 cd django_blank
 vagrant up
 
