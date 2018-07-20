@@ -1,5 +1,5 @@
 # django_blank
-Using vagrant and ansible these files will setup Django 2.01 with a MariaDB database.
+Using vagrant and ansible, these files will setup Django 2.01 with a MariaDB database. Vagrant uses ansible-local provisioning to  run the playbook.yml file on the vm.
 
 Requirements: Vagrant
 
