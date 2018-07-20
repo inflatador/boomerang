@@ -18,6 +18,6 @@ curl 127.0.0.1:8000
 
 The playbook will set the database name, username, and password to the same value. To change the value of the database, username, and password, edit the vagrant file and change 'django' to a value of your choosing.   
 
-ansible.extra_vars = {
-        dbname: 'django'
+ansible.extra_vars = {  
+        dbname: 'django'  
       }
