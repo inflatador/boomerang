@@ -1,6 +1,8 @@
 ---
 - name: setup dev server
   hosts: all 
+  vars:
+     dbame: "{{dbname}}"
   tasks:      
     - name: install mariadb-server
       dnf:
@@ -60,11 +62,11 @@
         enabled: yes
       become: yes
 
-    - name: Create a new database with name 'cburestore'
+    - name: Create a new database with name "{{dbname}}"
       mysql_db:
-          name: cburestore
-          state: present    
-          login_user: root
+        name: "{{dbname}}"
+        state: present    
+        login_user: root
     
     - name: Removes all anonymous user accounts
       mysql_user:
@@ -73,11 +75,11 @@
           state: absent
           login_user: root
 
-    - name: Create database user with name 'cburestore' and password 'cburestore' with all database privileges
+    - name: Create database user with name "{{dbname}}" and password "{{dbname}}" with all database privileges
       mysql_user:
-        name: cburestore
-        password: cburestore
-        priv: 'cburestore.*:ALL'
+        name: "{{dbname}}"
+        password: "{{dbname}}"
+        priv: "{{dbname}}.*:ALL"
         state: present
         login_user: root
     

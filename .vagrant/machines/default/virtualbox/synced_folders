@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/txhc4life/Documents/Development/django_blank","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
