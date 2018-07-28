@@ -5,9 +5,11 @@ Requirements: Vagrant
 
 The playbook will set the database name, username, and password to the same value. To change the value of the database, username, and password, edit the vagrant file and change 'django' to a value of your choosing.   
 
+```
 ansible.extra_vars = {  
         dbname: 'django'  
       }
+```
 
 // Installation  
 git clone git@github.com:txhc4life/django_blank.git  
@@ -23,7 +25,7 @@ cd mysite
 // You can now set the database setting in the mysite/settings.py file.  
 vim mysite/settings.py
 
-...  
+```  
 DATABASES = {
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
@@ -34,7 +36,7 @@ DATABASES = {
         'PORT': '3306',  
     }  
 } 
-...  
+``` 
 
 // Now you can start the development web server.  
 python3 manage.py runserver 0:8000    
