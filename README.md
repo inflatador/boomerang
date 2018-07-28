@@ -21,7 +21,7 @@ cd /vagrant
 cd mysite  
 python3 manage.py runserver 0:8000    
 
-// Test development server from host.
+// Test development server from host.  
 curl 127.0.0.1:8000  
 
 
