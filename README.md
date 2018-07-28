@@ -20,21 +20,21 @@ cd /vagrant
 /home/vagrant/.local/bin/django-admin startproject mysite  
 cd mysite  
 
-// You can now set the database setting in the mysite/settings.py file.
+// You can now set the database setting in the mysite/settings.py file.  
 vim mysite/settings.py
 
-...
+...  
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': 'django',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
-...
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'django',  
+        'USER': 'django',  
+        'PASSWORD': 'django',  
+        'HOST': '127.0.0.1',  
+        'PORT': '3306',  
+    }  
+}  
+...  
 
 // Now you can start the development web server.  
 python3 manage.py runserver 0:8000    
