@@ -5,68 +5,48 @@
      dbame: "{{dbname}}"
   tasks:      
     - name: install mariadb-server
-      dnf:
+      apt:
         name: mariadb-server
         state: present
       become: true
 
     - name: install python3-pip
-      dnf:
+      apt:
         name: python3-pip
         state: present
       become:  true
+
+    - name: install python-mysqldb
+      apt:
+        name: python-mysqldb
+        state: present
+      become:  true
    
-    - name: install mariadb-devel 
-      dnf:
-        name: mariadb-devel
+    - name: install libmariadbclient-dev 
+      apt:
+        name: libmariadbclient-dev
         state: present        
       become: true
 
-    - name: install gcc
-      dnf:
-        name: gcc
-        state: present
-      become: true
-
-    - name: install redhat-rpm-config
-      dnf:
-        name: redhat-rpm-config
-        state: present
-      become: true
-
-    - name: install python3-devel
-      dnf:
-        name: python3-devel
-        state: present
-      become: true
-     
-    - name: install django 
+    - name: install django and mysqlclient dependency
       pip:
-        name: "django==2.0.1 mysqlclient==1.3.13 pbr==0.9 psutil==1.2.1"
+        name: "django==2.0.1 mysqlclient"
         state: present
         executable: pip3
-        extra_args: --user
-       
-
-    - name: install python2-mysql
-      dnf:
-        name: python2-mysql
-        state: present
-      become: true
 
     - name: start mariadb-server
-
       service:
         name: mariadb
         state: started
         enabled: yes
-      become: yes
+      become: true
 
     - name: Create a new database with name "{{dbname}}"
       mysql_db:
         name: "{{dbname}}"
         state: present    
         login_user: root
+      become: true
     
     - name: Removes all anonymous user accounts
       mysql_user:
@@ -74,6 +54,7 @@
           host_all: yes
           state: absent
           login_user: root
+      become: true
 
     - name: Create database user with name "{{dbname}}" and password "{{dbname}}" with all database privileges
       mysql_user:
@@ -82,4 +63,4 @@
         priv: "{{dbname}}.*:ALL"
         state: present
         login_user: root
-    
+      become: true
