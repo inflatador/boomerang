@@ -23,7 +23,7 @@ cd /vagrant
 cd mysite  
 
 // You can now set the database setting in the mysite/settings.py file.  
-vim mysite/settings.py
+vi mysite/settings.py
 
 ```  
 DATABASES = {
