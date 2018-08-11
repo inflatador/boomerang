@@ -64,3 +64,10 @@
         state: present
         login_user: root
       become: true
+
+    - name: Add line to .bashrc to change the working directory to /vagrant upon ssh login
+      blockinfile:
+        dest: /home/vagrant/.bashrc
+        block: |
+          cd /vagrant    
+      become: true

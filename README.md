@@ -18,7 +18,6 @@ vagrant up
 
 // Once finished you can then ssh into the instance and create project. Replace mysite with your project's name.  
 vagran ssh   
-cd /vagrant  
 /home/vagrant/.local/bin/django-admin startproject mysite  
 cd mysite  
 
