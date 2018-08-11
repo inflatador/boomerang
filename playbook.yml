@@ -28,9 +28,15 @@
         state: present        
       become: true
 
-    - name: install django and mysqlclient dependency
+    - name: install django 
       pip:
-        name: "django==2.0.1 mysqlclient"
+        name: "django==2.0.1"
+        state: present
+        executable: pip3
+
+    - name: install mysqlclient dependency
+      pip:
+        name: "mysqlclient"
         state: present
         executable: pip3
 
@@ -71,3 +77,8 @@
         block: |
           cd /vagrant    
       become: true
+
+    - name: add /home/vagrant/.local/bin/ to the vagrant user's PATH
+      lineinfile:
+        dest: /home/vagrant/.bashrc
+        line: 'PATH=$PATH:/home/vagrant/.local/bin'
