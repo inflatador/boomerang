@@ -1,9 +1,11 @@
 # django_blank
-Using Vagrant, Virtualbox and Ansible, these files will setup Django 2.01 with a MariaDB database on Debian 9. After following the installation instructions the user with have a development environment ready to start the Django tutorial at https://docs.djangoproject.com/en/2.1/intro/tutorial01/
+Using Vagrant, Virtualbox and Ansible, these files will setup Django 2.01 with a MariaDB database on Debian 9. After following the installation instructions, the user will have a development environment ready to start their own Django project.
+
+Learn more about Django here: https://www.djangoproject.com/
 
 Requirements: Vagrant and Virtualbox
 
-The playbook will set the database name, django project, username, and password to the same value. To change the value, edit the vagrant file and change 'mysite' to a value of your choosing.   
+The playbook will set the django project, database name, database username, and database password to the same value. To change the value, edit the vagrant file and change 'mysite' to a value of your choosing.   
 
 ```
 ansible.extra_vars = {  
@@ -20,7 +22,7 @@ vagrant up
 vagran ssh   
 cd mysite  
 
-// You can now set the database setting in the mysite/settings.py file.  
+// You can now set the database connection credentials in the mysite/settings.py file.  
 vim mysite/settings.py
 
 ```  
