@@ -1,9 +1,9 @@
 ---
 - name: setup dev server
-  hosts: all 
+  hosts: all
   vars:
      dbame: "{{dbname}}"
-  tasks:      
+  tasks:
     - name: install mariadb-server
       apt:
         name: mariadb-server
@@ -16,19 +16,25 @@
         state: present
       become:  true
 
+    - name: install vim
+      apt:
+        name: vim
+        state: present
+      become:  true
+
     - name: install python-mysqldb
       apt:
         name: python-mysqldb
         state: present
       become:  true
-   
-    - name: install libmariadbclient-dev 
+
+    - name: install libmariadbclient-dev
       apt:
         name: libmariadbclient-dev
-        state: present        
+        state: present
       become: true
 
-    - name: install django 
+    - name: install django
       pip:
         name: "django==2.0.1"
         state: present
@@ -50,10 +56,10 @@
     - name: Create a new database with name "{{dbname}}"
       mysql_db:
         name: "{{dbname}}"
-        state: present    
+        state: present
         login_user: root
       become: true
-    
+
     - name: Removes all anonymous user accounts
       mysql_user:
           name: ''
@@ -75,10 +81,18 @@
       blockinfile:
         dest: /home/vagrant/.bashrc
         block: |
-          cd /vagrant    
+          cd /vagrant
       become: true
 
     - name: add /home/vagrant/.local/bin/ to the vagrant user's PATH
       lineinfile:
         dest: /home/vagrant/.bashrc
         line: 'PATH=$PATH:/home/vagrant/.local/bin'
+
+    - name: Running django-admin to create new project
+      shell: 'python3 /home/vagrant/.local/bin/django-admin startproject {{dbname}}'
+      args:
+        chdir: /vagrant
+        creates: '{{dbname}}/manage.py'
+      become: true
+      become_user: vagrant
