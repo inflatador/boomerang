@@ -21,7 +21,7 @@ vagrant up
 // Once finished you can then ssh into the vm.   
 vagrant ssh   
 
-// Change to the django project's directory. Replace 'mysite' with your project's name.
+// Change to the django project's directory. Replace 'mysite' with your project's name.  
 cd mysite  
 
 // Now you can start the development web server.  
