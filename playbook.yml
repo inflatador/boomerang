@@ -76,3 +76,8 @@
         creates: '{{ dbname }}/manage.py'
       become: true
       become_user: vagrant
+
+    - name: remove old django DATABASE configuration settings
+      template:
+        src: settings.py.j2
+        dest: /vagrant/{{ dbname }}/{{ dbname }}/settings.py
