@@ -19,7 +19,7 @@ cd django_blank
 vagrant up  
 
 // Once finished you can then ssh into the instance and create project. Replace mysite with your project's name.  
-vagran ssh   
+vagrant ssh   
 cd mysite  
 
 // You can now set the database connection credentials in the mysite/settings.py file.  
