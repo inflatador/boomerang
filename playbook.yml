@@ -2,49 +2,29 @@
 - name: setup dev server
   hosts: all
   vars:
-     dbame: "{{dbname}}"
+     dbame: "{{ dbname }}"
   tasks:
-    - name: install mariadb-server
+    - name: install dependencies via apt
       apt:
-        name: mariadb-server
-        state: present
+          name: "{{ packages }}"
+      vars:
+        packages:
+        - mariadb-server
+        - python3-pip
+        - vim
+        - python-mysqldb
+        - libmariadbclient-dev
       become: true
 
-    - name: install python3-pip
-      apt:
-        name: python3-pip
-        state: present
-      become:  true
-
-    - name: install vim
-      apt:
-        name: vim
-        state: present
-      become:  true
-
-    - name: install python-mysqldb
-      apt:
-        name: python-mysqldb
-        state: present
-      become:  true
-
-    - name: install libmariadbclient-dev
-      apt:
-        name: libmariadbclient-dev
-        state: present
-      become: true
-
-    - name: install django
+    - name: install dependencies via pip
       pip:
-        name: "django==2.0.1"
+        name: "{{ packages }}"
         state: present
         executable: pip3
-
-    - name: install mysqlclient dependency
-      pip:
-        name: "mysqlclient"
-        state: present
-        executable: pip3
+      vars:
+        packages:
+        - django==2.0.1
+        - mysqlclient
 
     - name: start mariadb-server
       service:
@@ -53,9 +33,9 @@
         enabled: yes
       become: true
 
-    - name: Create a new database with name "{{dbname}}"
+    - name: Create a new database with name "{{ dbname }}"
       mysql_db:
-        name: "{{dbname}}"
+        name: "{{ dbname }}"
         state: present
         login_user: root
       become: true
@@ -68,11 +48,11 @@
           login_user: root
       become: true
 
-    - name: Create database user with name "{{dbname}}" and password "{{dbname}}" with all database privileges
+    - name: Create database user with name {{ dbname }} and password {{ dbname }} with all database privileges
       mysql_user:
-        name: "{{dbname}}"
-        password: "{{dbname}}"
-        priv: "{{dbname}}.*:ALL"
+        name: "{{ dbname }}"
+        password: "{{ dbname }}"
+        priv: "{{ dbname }}.*:ALL"
         state: present
         login_user: root
       become: true
@@ -90,9 +70,9 @@
         line: 'PATH=$PATH:/home/vagrant/.local/bin'
 
     - name: Running django-admin to create new project
-      shell: 'python3 /home/vagrant/.local/bin/django-admin startproject {{dbname}}'
+      shell: python3 /home/vagrant/.local/bin/django-admin startproject {{ dbname }}
       args:
         chdir: /vagrant
-        creates: '{{dbname}}/manage.py'
+        creates: '{{ dbname }}/manage.py'
       become: true
       become_user: vagrant
