@@ -18,8 +18,10 @@ git clone git@github.com:txhc4life/django_blank.git
 cd django_blank  
 vagrant up  
 
-// Once finished you can then ssh into the instance and create project. Replace mysite with your project's name.  
+// Once finished you can then ssh into the vm.   
 vagrant ssh   
+
+// Change to the django project's directory. Replace 'mysite' with your project's name.
 cd mysite  
 
 // Now you can start the development web server.  
