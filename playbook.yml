@@ -52,7 +52,7 @@
       mysql_user:
         name: "{{ dbname }}"
         password: "{{ dbname }}"
-        priv: "{{ dbname }}.*:ALL"
+        priv: "*.*:ALL"
         state: present
         login_user: root
       become: true
